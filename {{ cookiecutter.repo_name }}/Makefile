@@ -76,6 +76,22 @@ endif
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
+## Train model
+train_model:
+	$(PYTHON_INTERPRETER) src/models/train_model.py $(PROJECT_DIR)
+
+## Evaluate model
+evaluate_model:
+	$(PYTHON_INTERPRETER) src/models/evaluate_model.py $(PROJECT_DIR)
+
+## Build features
+build_features:
+	$(PYTHON_INTERPRETER) src/features/build_features.py $(PROJECT_DIR)
+
+## Build features
+visualize:
+	$(PYTHON_INTERPRETER) src/visualization/visualize.py $(PROJECT_DIR)
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
