@@ -33,6 +33,7 @@ data: requirements
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+	rm -rf output
 
 ## Lint using flake8
 lint:
@@ -59,7 +60,7 @@ create_environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
+	conda create --name $(PROJECT_NAME) python=3.6
 else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
@@ -91,6 +92,14 @@ build_features:
 ## Build features
 visualize:
 	$(PYTHON_INTERPRETER) src/visualization/visualize.py $(PROJECT_DIR)
+
+## Package output
+package_output:
+	rm -rf output/
+	mkdir output
+	cp models/*.* output/
+	tar cfz ./output.tar.gz output/
+	mv ./output.tar.gz /output/output.tar.gz
 
 #################################################################################
 # PROJECT RULES                                                                 #
