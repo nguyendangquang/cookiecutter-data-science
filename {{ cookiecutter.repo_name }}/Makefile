@@ -42,17 +42,17 @@ lint:
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(S3_DATA_FOLDER)
+	aws s3 sync data/ s3://$(S3_DATA_FOLDER) --delete
 else
-	aws s3 sync data/ s3://$(S3_DATA_FOLDER) --profile $(PROFILE)
+	aws s3 sync data/ s3://$(S3_DATA_FOLDER) --delete --profile $(PROFILE)
 endif
 
 ## Download Data from S3
 sync_data_from_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(S3_DATA_FOLDER) data/
+	aws s3 sync s3://$(S3_DATA_FOLDER) data/ --delete
 else
-	aws s3 sync s3://$(S3_DATA_FOLDER) data/ --profile $(PROFILE)
+	aws s3 sync s3://$(S3_DATA_FOLDER) data/ --delete --profile $(PROFILE)
 endif
 
 ## Set up python interpreter environment
